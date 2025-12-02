@@ -1,5 +1,5 @@
 {
-  "name": "Lumina JSON Studio",
-  "description": "A professional-grade JSON formatter and validator featuring syntax highlighting, collapsible trees, and AI-powered error fixing using Gemini.",
+  "name": "AI JSON",
+  "description": "JSON格式化，JSON压缩，JSON去除转义，A professional-grade JSON formatter and validator featuring syntax highlighting, collapsible trees, and AI-powered error fixing using Gemini.",
   "requestFramePermissions": []
 }

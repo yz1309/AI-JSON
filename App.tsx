@@ -7,7 +7,7 @@ import { EditorState, Theme } from './types';
 import { AlertCircle } from 'lucide-react';
 
 const DEFAULT_JSON = `{
-  "welcome": "Lumina JSON Studio",
+  "welcome": "AI JSON",
   "instructions": [
     "Paste your JSON on the left",
     "View the formatted tree on the right",
