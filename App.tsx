@@ -47,7 +47,7 @@ const App: React.FC = () => {
 
       if (err instanceof Error) {
         message = err.message;
-        
+
         // Try to extract position from typical V8 error messages like "Unexpected token } in JSON at position 42"
         const match = message.match(/at position (\d+)/);
         if (match && match[1]) {
@@ -118,7 +118,7 @@ const App: React.FC = () => {
       .replace(/\\r/g, '\r')
       .replace(/\\t/g, '\t')
       .replace(/\\\\/g, '\\');
-    
+
     parseJson(unescaped);
   };
 
@@ -161,15 +161,15 @@ const App: React.FC = () => {
         {/* Header */}
         <header className="h-14 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center px-6 shrink-0 transition-colors duration-200">
           <div className="flex items-center gap-2">
-             <div className="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
-               {}
-             </div>
-             <h1 className="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">Lumina JSON Studio</h1>
+            <div className="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+              { }
+            </div>
+            <h1 className="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">AI JSON</h1>
           </div>
         </header>
 
         {/* Toolbar */}
-        <Toolbar 
+        <Toolbar
           onFormat={handleFormat}
           onMinify={handleMinify}
           onUnescape={handleUnescape}
@@ -186,59 +186,59 @@ const App: React.FC = () => {
 
         {/* Main Content - Split View */}
         <main className="flex-1 flex flex-col md:flex-row overflow-hidden relative">
-          
+
           {/* Left Panel: Raw Input */}
           <section className="flex-1 flex flex-col border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800 relative min-h-[300px] transition-colors duration-200">
-             <div className="absolute top-0 left-0 right-0 h-8 bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur z-20 flex items-center px-4 border-b border-slate-200 dark:border-slate-800/50 transition-colors duration-200">
-               <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Raw JSON</span>
-             </div>
-             
-             <RawJsonEditor 
-               value={state.text} 
-               onChange={handleTextChange} 
-               errorIndex={state.errorIndex} 
-             />
+            <div className="absolute top-0 left-0 right-0 h-8 bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur z-20 flex items-center px-4 border-b border-slate-200 dark:border-slate-800/50 transition-colors duration-200">
+              <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Raw JSON</span>
+            </div>
 
-             {/* Error Overlay/Message */}
-             {state.error && (
-               <div className="absolute bottom-4 left-4 right-4 bg-rose-50 dark:bg-rose-950/95 border border-rose-200 dark:border-rose-500/30 p-3 rounded-md shadow-lg backdrop-blur-sm animate-in fade-in slide-in-from-bottom-2 z-30">
-                  <div className="flex items-start gap-3">
-                    <AlertCircle className="text-rose-600 dark:text-rose-500 shrink-0 mt-0.5" size={16} />
-                    <div className="flex-1">
-                      <h4 className="text-rose-700 dark:text-rose-400 text-xs font-bold uppercase mb-1">Parsing Error</h4>
-                      <p className="text-rose-600 dark:text-rose-200/80 text-xs font-mono break-all">{state.error}</p>
-                    </div>
+            <RawJsonEditor
+              value={state.text}
+              onChange={handleTextChange}
+              errorIndex={state.errorIndex}
+            />
+
+            {/* Error Overlay/Message */}
+            {state.error && (
+              <div className="absolute bottom-4 left-4 right-4 bg-rose-50 dark:bg-rose-950/95 border border-rose-200 dark:border-rose-500/30 p-3 rounded-md shadow-lg backdrop-blur-sm animate-in fade-in slide-in-from-bottom-2 z-30">
+                <div className="flex items-start gap-3">
+                  <AlertCircle className="text-rose-600 dark:text-rose-500 shrink-0 mt-0.5" size={16} />
+                  <div className="flex-1">
+                    <h4 className="text-rose-700 dark:text-rose-400 text-xs font-bold uppercase mb-1">Parsing Error</h4>
+                    <p className="text-rose-600 dark:text-rose-200/80 text-xs font-mono break-all">{state.error}</p>
                   </div>
-               </div>
-             )}
+                </div>
+              </div>
+            )}
           </section>
 
           {/* Right Panel: Tree View */}
           <section className="flex-1 flex flex-col bg-white dark:bg-[#0b1221] relative transition-colors duration-200">
-             <div className="absolute top-0 left-0 right-0 h-8 bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur z-10 flex items-center px-4 border-b border-slate-200 dark:border-slate-800/50 transition-colors duration-200">
-               <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Interactive Tree</span>
-             </div>
-             
-             <div className="flex-1 overflow-auto p-4 pt-12 custom-scrollbar">
-               {state.parsed !== undefined ? (
-                 <JsonNode 
-                   value={state.parsed} 
-                   isLast={true} 
-                   name={undefined}
-                 />
-               ) : (
-                 <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 gap-4 transition-colors duration-200">
-                   {state.error ? (
-                      <p className="text-sm">Fix parsing errors to view the tree</p>
-                   ) : (
-                      <p className="text-sm">Enter valid JSON to visualize</p>
-                   )}
-                 </div>
-               )}
-             </div>
+            <div className="absolute top-0 left-0 right-0 h-8 bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur z-10 flex items-center px-4 border-b border-slate-200 dark:border-slate-800/50 transition-colors duration-200">
+              <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Interactive Tree</span>
+            </div>
+
+            <div className="flex-1 overflow-auto p-4 pt-12 custom-scrollbar">
+              {state.parsed !== undefined ? (
+                <JsonNode
+                  value={state.parsed}
+                  isLast={true}
+                  name={undefined}
+                />
+              ) : (
+                <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 gap-4 transition-colors duration-200">
+                  {state.error ? (
+                    <p className="text-sm">Fix parsing errors to view the tree</p>
+                  ) : (
+                    <p className="text-sm">Enter valid JSON to visualize</p>
+                  )}
+                </div>
+              )}
+            </div>
           </section>
         </main>
-        
+
         {/* Styles for custom scrollbar */}
         <style>{`
           .custom-scrollbar::-webkit-scrollbar {
