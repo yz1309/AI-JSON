@@ -1,0 +1,52 @@
+import { Language } from './types';
+
+export const TRANSLATIONS = {
+  zh: {
+    appTitle: "AI JSON",
+    valid: "JSON 有效",
+    invalid: "JSON 无效",
+    format: "格式化",
+    minify: "压缩",
+    unescape: "去转义",
+    fix: "AI 修复",
+    fixing: "修复中...",
+    sample: "生成示例",
+    generating: "生成中...",
+    copy: "复制",
+    clear: "清空",
+    switchTheme: "切换主题",
+    switchLang: "Switch to English",
+    rawJson: "原始 JSON",
+    interactiveTree: "交互式视图",
+    parsingError: "解析错误",
+    treeError: "请修复解析错误以查看树状图",
+    treeEmpty: "请输入有效的 JSON 进行可视化",
+    aiFixFail: "AI 修复失败，请查看控制台详情。",
+    aiGenFail: "生成示例数据失败。",
+    copySuccess: "已复制到剪贴板"
+  },
+  en: {
+    appTitle: "AI JSON",
+    valid: "Valid JSON",
+    invalid: "Invalid JSON",
+    format: "Format",
+    minify: "Minify",
+    unescape: "Unescape",
+    fix: "AI Fix",
+    fixing: "Fixing...",
+    sample: "Sample",
+    generating: "Generating...",
+    copy: "Copy",
+    clear: "Clear All",
+    switchTheme: "Switch Theme",
+    switchLang: "切换到中文",
+    rawJson: "Raw JSON",
+    interactiveTree: "Interactive Tree",
+    parsingError: "Parsing Error",
+    treeError: "Fix parsing errors to view the tree",
+    treeEmpty: "Enter valid JSON to visualize",
+    aiFixFail: "AI failed to fix the JSON. Check console for details.",
+    aiGenFail: "Failed to generate sample data.",
+    copySuccess: "Copied to clipboard"
+  }
+};

@@ -1,4 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
+import { Language } from "../types";
 
 const getAiClient = () => {
   const apiKey = process.env.API_KEY;
@@ -32,14 +33,19 @@ export const fixJsonWithAi = async (malformedJson: string): Promise<string> => {
   }
 };
 
-export const generateSampleJson = async (topic: string): Promise<string> => {
+export const generateSampleJson = async (topic: string, language: Language): Promise<string> => {
   const ai = getAiClient();
   if (!ai) throw new Error("AI Service Unavailable: Missing API Key");
+
+  const langInstruction = language === 'zh' 
+    ? "Use Simplified Chinese for all string values and keys where appropriate." 
+    : "Use English for all content.";
 
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: `Generate a complex, nested JSON example regarding "${topic}". 
+      ${langInstruction}
       Include arrays, booleans, numbers, and nulls. 
       Return ONLY the raw JSON string without markdown formatting.`,
     });

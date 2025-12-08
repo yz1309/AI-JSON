@@ -8,9 +8,11 @@ import {
   Bug,
   Quote,
   Sun,
-  Moon
+  Moon,
+  Languages
 } from 'lucide-react';
-import { Theme } from '../types';
+import { Theme, Language } from '../types';
+import { TRANSLATIONS } from '../constants';
 
 interface ToolbarProps {
   onFormat: () => void;
@@ -21,7 +23,9 @@ interface ToolbarProps {
   onFix: () => void;
   onGenerate: () => void;
   onToggleTheme: () => void;
+  onToggleLang: () => void;
   theme: Theme;
+  lang: Language;
   isAiLoading: boolean;
   isValid: boolean;
   hasError: boolean;
@@ -36,11 +40,14 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onFix,
   onGenerate,
   onToggleTheme,
+  onToggleLang,
   theme,
+  lang,
   isAiLoading,
   isValid,
   hasError
 }) => {
+  const t = TRANSLATIONS[lang];
   const buttonClass = "flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 text-xs font-medium transition-all";
 
   return (
@@ -49,7 +56,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         <div className="flex items-center gap-2 mr-4 shrink-0">
            <div className={`w-3 h-3 rounded-full ${isValid ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]' : 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]'}`}></div>
            <span className={`text-sm font-medium ${isValid ? 'text-green-600 dark:text-green-500' : 'text-rose-600 dark:text-rose-500'}`}>
-             {isValid ? 'Valid JSON' : 'Invalid JSON'}
+             {isValid ? t.valid : t.invalid}
            </span>
         </div>
 
@@ -58,28 +65,28 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         <button 
           onClick={onFormat}
           className={buttonClass}
-          title="Prettify JSON"
+          title={t.format}
         >
           <AlignLeft size={14} />
-          <span className="hidden sm:inline">Format</span>
+          <span className="hidden sm:inline">{t.format}</span>
         </button>
 
         <button 
           onClick={onMinify}
           className={buttonClass}
-          title="Minify JSON"
+          title={t.minify}
         >
           <Minimize2 size={14} />
-          <span className="hidden sm:inline">Minify</span>
+          <span className="hidden sm:inline">{t.minify}</span>
         </button>
 
         <button 
           onClick={onUnescape}
           className={buttonClass}
-          title="Remove escape characters"
+          title={t.unescape}
         >
           <Quote size={14} />
-          <span className="hidden sm:inline">Unescape</span>
+          <span className="hidden sm:inline">{t.unescape}</span>
         </button>
       </div>
 
@@ -91,7 +98,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-medium transition-all shadow-lg shadow-indigo-500/20 animate-pulse whitespace-nowrap"
            >
              <Bug size={14} />
-             <span>{isAiLoading ? 'Fixing...' : 'AI Fix'}</span>
+             <span>{isAiLoading ? t.fixing : t.fix}</span>
            </button>
          )}
 
@@ -102,16 +109,25 @@ export const Toolbar: React.FC<ToolbarProps> = ({
              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-200 dark:bg-indigo-600/20 dark:hover:bg-indigo-600/30 dark:text-indigo-300 dark:border-indigo-500/30 text-xs font-medium transition-all whitespace-nowrap"
             >
               <Wand2 size={14} />
-              <span>{isAiLoading ? 'Generating...' : 'Sample'}</span>
+              <span>{isAiLoading ? t.generating : t.sample}</span>
             </button>
          )}
 
         <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-2 hidden sm:block"></div>
 
         <button 
+          onClick={onToggleLang}
+          className={buttonClass}
+          title={t.switchLang}
+        >
+          <Languages size={14} />
+          <span className="ml-1 text-[10px] font-bold">{lang === 'zh' ? 'CN' : 'EN'}</span>
+        </button>
+
+        <button 
           onClick={onToggleTheme}
           className={buttonClass}
-          title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          title={t.switchTheme}
         >
           {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
         </button>
@@ -119,16 +135,16 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         <button 
           onClick={onCopy}
           className={buttonClass}
-          title="Copy JSON"
+          title={t.copy}
         >
           <Copy size={14} />
-          <span className="hidden sm:inline">Copy</span>
+          <span className="hidden sm:inline">{t.copy}</span>
         </button>
         
         <button 
           onClick={onClear}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-100 hover:bg-rose-100 hover:text-rose-600 dark:bg-slate-800 dark:hover:bg-rose-900/50 dark:hover:text-rose-400 text-slate-500 dark:text-slate-400 text-xs font-medium transition-all"
-          title="Clear All"
+          title={t.clear}
         >
           <Trash2 size={14} />
         </button>

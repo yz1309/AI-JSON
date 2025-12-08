@@ -14,6 +14,7 @@ export interface EditorState {
 }
 
 export type Theme = 'light' | 'dark';
+export type Language = 'zh' | 'en';
 
 export enum ViewMode {
   CODE = 'CODE',
