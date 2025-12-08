@@ -131,7 +131,6 @@ const App: React.FC = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(state.text);
-    // Optional: Add toast here
   };
 
   const handleClear = () => {

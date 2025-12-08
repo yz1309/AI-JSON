@@ -38,7 +38,7 @@ export const generateSampleJson = async (topic: string, language: Language): Pro
   if (!ai) throw new Error("AI Service Unavailable: Missing API Key");
 
   const langInstruction = language === 'zh' 
-    ? "Use Simplified Chinese for all string values and keys where appropriate." 
+    ? "When appropriate, use Simplified Chinese for all string values, but do not use Simplified Chinese for keys." 
     : "Use English for all content.";
 
   try {
